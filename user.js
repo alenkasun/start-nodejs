@@ -1,3 +1,5 @@
+var phrases = require('./ru');
+
 function User(name){
     this.name = name;
 };
