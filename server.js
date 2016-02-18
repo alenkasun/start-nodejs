@@ -1,5 +1,5 @@
 var User = require('./user'),
-    db = require('./db');
+    db = require('db');
 
 function run() {
     var user1 = new User("Pete");
