@@ -19,4 +19,6 @@ server.emit('request', {from: "Client"});
 server.emit('request', {from: "Client again"});
 
 
-server.emit('error');  // throw TypeError
+server.on('error', function(){});
+
+server.emit('error', new Error('server mistake'));
