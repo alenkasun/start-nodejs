@@ -2,17 +2,17 @@ var http = require('http');
 var url = require('url');
 
 var server = new http.Server(function(req, res){
-    console.log(req.headers);
+    var urlParsed = url.parse(req.url, true);
+    debugger;
 
-    var urlParsed = url.parse(req.url, true);   // если указать true, то query
-
-    if(urlParsed.pathname == '/echo' && urlParsed.query.message){
-        res.writeHead(200, "OK", {'Cache-control': 'no-cache'});
+    if(req.method == 'GET' && urlParsed.pathname == '/echo' && urlParsed.query.message){
         res.end(urlParsed.query.message);
-    } else {
-        res.statusCode = 404;
-        res.end("Page not found");
+        return;
     }
+
+    res.statusCode = 404;
+    res.end("Page not found");
 });
 
 server.listen(1337, '127.0.0.1');
+console.log("Server is running");
