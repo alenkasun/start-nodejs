@@ -2,12 +2,12 @@ var http = require('http');
 var url = require('url');
 
 var server = new http.Server(function(req, res){
-    console.log(req.method, req.url);
+    console.log(req.headers);
 
-    var urlParsed = url.parse(req.url, true);
-    console.log(urlParsed);
+    var urlParsed = url.parse(req.url, true);   // если указать true, то query
 
     if(urlParsed.pathname == '/echo' && urlParsed.query.message){
+        res.setHeader('Cache-control', 'no-cache');  // removeHeader
         res.end(urlParsed.query.message);
     } else {
         res.statusCode = 404;
