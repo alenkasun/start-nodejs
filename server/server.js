@@ -1,10 +1,8 @@
 var http = require('http');
 
-var server = new http.Server();  // EventEmitter
+http.createServer(function(req, res) {
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end("Hello, World!\n");
+}).listen(1337, '127.0.0.1');
 
-server.listen(1337, '127.0.0.1')
-
-var counter = 0;
-server.on('request', function(req, res){
-    res.end("Hello,world! " + ++counter);
-});
+console.log("Server running at http://127.0.0.1:1337");
