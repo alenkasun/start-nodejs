@@ -1,8 +1,18 @@
 var http = require('http');
+var url = require('url');
 
-http.createServer(function(req, res) {
-    res.writeHead(200, {'Content-Type': 'text/plain'});
-    res.end("Hello, World!\n");
-}).listen(1337, '127.0.0.1');
+var server = new http.Server(function(req, res){
+    console.log(req.method, req.url);
 
-console.log("Server running at http://127.0.0.1:1337");
+    var urlParsed = url.parse(req.url, true);
+    console.log(urlParsed);
+
+    if(urlParsed.pathname == '/echo' && urlParsed.query.message){
+        res.end(urlParsed.query.message);
+    } else {
+        res.statusCode = 404;
+        res.end("Page not found");
+    }
+});
+
+server.listen(1337, '127.0.0.1');
