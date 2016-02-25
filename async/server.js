@@ -5,8 +5,11 @@ http.createServer(function(req, res){
     var info;
 
     if(req.url == '/') {
-        info = fs.readFileSync('index.html');
-        res.end(info);
+        fs.readFile('index.html', function (err, info) {
+            console.log(err);
+            res.write(err.code);
+            res.end(info);
+        });
     } else if (req.url == '/now') {
         res.end(new Date().toString());
     }
