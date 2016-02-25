@@ -6,7 +6,9 @@ var server = new http.Server(function(req, res){
 
 
 setTimeout(function(){
-    server.close();
+    server.close(function(){
+        process.exit();
+    });
 }, 2500);
 
 setInterval(function(){
