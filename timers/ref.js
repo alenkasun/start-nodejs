@@ -7,11 +7,11 @@ var server = new http.Server(function(req, res){
 
 setTimeout(function(){
     server.close(function(){
-        process.exit();
+        clearInterval(timer);
     });
 }, 2500);
 
-setInterval(function(){
+var timer = setInterval(function(){
     console.log(process.memoryUsage());
 }, 1000);
 
