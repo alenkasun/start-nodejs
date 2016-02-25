@@ -6,8 +6,12 @@ http.createServer(function(req, res){
 
     if(req.url == '/') {
         fs.readFile('index.html', function (err, info) {
-            console.log(err);
-            res.write(err.code);
+            if(err){
+                console.log(err);
+                res.statusCode = 500;
+                res.end('Error occurred on server back');
+                return;
+            }
             res.end(info);
         });
     } else if (req.url == '/now') {
