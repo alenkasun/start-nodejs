@@ -5,7 +5,7 @@ var stream = new fs.ReadStream(__filename);
 
 stream.on('readable', function(){
    var data = stream.read();
-    console.log(data);
+    console.log(data.toString());
 });
 
 stream.on('end', function () {
